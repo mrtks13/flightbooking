@@ -3,8 +3,6 @@ server:
   servlet:
     context-path: /flightbooking/api/v1/
 
-
-
 spring:
   profiles:
     active: dev
@@ -14,36 +12,19 @@ spring:
     serialization:
       indent-output: true
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3307/flightbookingapp?useSSL=false}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:finartz}
-    hikari:
-      poolName: Hikari
-      auto-commit: false
-      data-source-properties:
-        cachePrepStmts: true
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        useServerPrepStmts: true
-
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:flightbooking
+    username: finartz
+    password: finartz
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    database: MYSQL
-    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
     open-in-view : false
-    hibernate:
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
-      ddl-auto: update
-    properties:
-      hibernate.id.new_generator_mappings: true
-      hibernate.connection.provider_disables_autocommit: true
-      hibernate.cache.use_second_level_cache: false
-      hibernate.cache.use_query_cache: false
-      hibernate.generate_statistics: false
-      hibernate:jdbc.time_zone: UTC
+  main:
+    allow-bean-definition-overriding: true
 
 
 
+  h2:
+    console:
+      enabled: true
