@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("flight/")
 public class TicketController {
     private final TicketService ticketService;
 
@@ -26,17 +25,17 @@ public class TicketController {
     }
 
 
-    @PostMapping(value = "save", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping
     public ResponseEntity<TicketBookingResponseDto> makeBooking(@RequestBody @Valid TicketBookingRequestDto ticketBookingRequestDto) {
         return new ResponseEntity<>(ticketService.createTicketBooking(ticketBookingRequestDto), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "search/{ticketNo}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "tickets/{ticketNo}")
     public ResponseEntity<TicketBookingResponseDto> getTicketByTicketNo(@PathVariable("ticketNo") @NotEmpty String ticketNo) {
         return new ResponseEntity<>(ticketService.getTicketByTicketNo(ticketNo), HttpStatus.OK);
     }
 
-    @PutMapping(value = "cancel/{ticketid}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value = "tickets/{ticketid}")
     public ResponseEntity<TicketBookingResponseDto> getAirlineCompanyListByName(@PathVariable("ticketid") @NotEmpty Long ticketId) {
         return new ResponseEntity<>(ticketService.cancelTicketById(ticketId), HttpStatus.OK);
     }

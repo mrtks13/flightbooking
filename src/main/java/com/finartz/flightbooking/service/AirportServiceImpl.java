@@ -35,6 +35,7 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Page<AirportDto> getAllAirportList(int page, int size, String sort) {
 
         Page<Airport> airportPage = airportRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
@@ -72,6 +73,7 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Airport getAirportById(Long airportId) {
         return airportRepository.findById(airportId).orElseThrow(EntityNotFoundException::new);
     }

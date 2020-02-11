@@ -92,7 +92,7 @@ public class TicketServiceImp implements TicketService {
 
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly =true, propagation = Propagation.SUPPORTS)
     public TicketBookingResponseDto getTicketByTicketNo(String ticketNo) {
 
         Optional<Ticket> ticket = ticketRepository.findFirstByTicketNoIgnoreCase(ticketNo);

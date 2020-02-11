@@ -36,7 +36,7 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
     public List<AirlineCompany> getAirlineCompanyListByName(String name) {
         if (StringUtils.isEmpty(name)) {
             throw new FlightBookingException(ErrorMessages.NAME_CAN_NOT_BE_NULL);

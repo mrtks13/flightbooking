@@ -16,10 +16,10 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @RestController
-@RequestMapping("airport/")
 public class AirportController {
     private final AirportService airportService;
     private static final Logger LOGGER = LoggerFactory.getLogger(AirportController.class);
+
     private static class AirportControllerException extends RuntimeException {
         private AirportControllerException(String message) {
             super(message);
@@ -32,7 +32,7 @@ public class AirportController {
     }
 
 
-    @GetMapping(value = "all", params = {"page", "size", "sort"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "airports/", params = {"page", "size", "sort"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Page<AirportDto>> getAllAirPortList(
             @RequestParam("page") int page, @RequestParam("size") int size, @RequestParam("sort") String sort
     ) {
@@ -46,12 +46,12 @@ public class AirportController {
         return new ResponseEntity<>(resultPage, HttpStatus.OK);
     }
 
-    @GetMapping(value = "search/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<AirportDto>> getAirlineCompanyListByName(@PathVariable @NotEmpty String name) {
+    @GetMapping(value = "airports/{name}")
+    public ResponseEntity<List<AirportDto>> getAirlineCompanyListByName(@PathVariable("name") @NotEmpty String name) {
         return new ResponseEntity<>(airportService.getAirportByName(name), HttpStatus.OK);
     }
 
-    @PostMapping(value = "save", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "airports/")
     public ResponseEntity<AirportDto> saveAirlineCompany(@RequestBody @Valid AirportDto airportDto) {
         return new ResponseEntity<AirportDto>(airportService.saveAirport(airportDto), HttpStatus.OK);
     }

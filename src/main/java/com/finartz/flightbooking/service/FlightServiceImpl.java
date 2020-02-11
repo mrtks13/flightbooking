@@ -32,7 +32,7 @@ public class FlightServiceImpl implements FlightService {
 
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Flight getFlightById(Long id) {
         return flightRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
@@ -73,6 +73,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public FlightResultDto searchFlights(FlightSearchDto flightSearchDto) {
 
 

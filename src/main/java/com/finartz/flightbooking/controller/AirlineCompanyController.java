@@ -14,7 +14,6 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @RestController
-@RequestMapping("airlinecompanies/")
 public class AirlineCompanyController {
     private final AirlineCompanyService airlineCompanyService;
 
@@ -24,18 +23,18 @@ public class AirlineCompanyController {
         this.airlineCompanyService = airlineCompanyService;
     }
 
-    @GetMapping(value = "all", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "airlinecompanies/")
     public ResponseEntity<List<AirlineCompany>> getAllAirlineCompanyList() {
         List<AirlineCompany> airlineCompanyList = airlineCompanyService.getAllAirlineCompanyList();
         return new ResponseEntity<>(airlineCompanyList, HttpStatus.OK);
     }
 
-    @GetMapping(value = "search/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping("airlinecompanies/{name}")
     public ResponseEntity<List<AirlineCompany>> getAirlineCompanyListByName(@PathVariable @NotEmpty String name) {
         return new ResponseEntity<>(airlineCompanyService.getAirlineCompanyListByName(name), HttpStatus.OK);
     }
 
-    @PostMapping(value = "save", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping("airlinecompanies/")
     public ResponseEntity<AirlineCompanyDto> saveAirlineCompany(@RequestBody @Valid AirlineCompanyDto airlineCompanyDto) {
         return new ResponseEntity<>(airlineCompanyService.saveAirlineCompany(airlineCompanyDto), HttpStatus.CREATED);
     }

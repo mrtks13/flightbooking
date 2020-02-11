@@ -37,7 +37,7 @@ class AirlineCompanyControllerTest {
     @Test
     void getAllAirlineCompanyList() {
 
-        ResponseEntity<AirlineCompany[]> responseEntity = restTemplate.exchange(apiPath+"airlinecompanies/all", HttpMethod.GET, testHelper.getRequestHeaders(), AirlineCompany[].class);
+        ResponseEntity<AirlineCompany[]> responseEntity = restTemplate.exchange(apiPath+"airlinecompanies", HttpMethod.GET, testHelper.getRequestHeaders(), AirlineCompany[].class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(MediaType.APPLICATION_JSON, responseEntity.getHeaders().getContentType());
@@ -46,7 +46,7 @@ class AirlineCompanyControllerTest {
     @Test
     void getAirlineCompanyListByName() {
 
-        ResponseEntity<AirlineCompany[]> responseEntity = restTemplate.exchange(apiPath+"airlinecompanies/search/thy", HttpMethod.GET, testHelper.getRequestHeaders(), AirlineCompany[].class);
+        ResponseEntity<AirlineCompany[]> responseEntity = restTemplate.exchange(apiPath+"airlinecompanies/thy", HttpMethod.GET, testHelper.getRequestHeaders(), AirlineCompany[].class);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(MediaType.APPLICATION_JSON, responseEntity.getHeaders().getContentType());

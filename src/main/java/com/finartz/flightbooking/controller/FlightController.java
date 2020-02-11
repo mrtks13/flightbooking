@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("flight/")
 public class FlightController {
     private final FlightService flightService;
 
@@ -33,14 +32,14 @@ public class FlightController {
     }
 
 
-    @GetMapping(value = "search/")
-    public ResponseEntity<FlightResultDto> searcFlight(@RequestParam Long departureAirportId,
-                                                       @RequestParam Long arrivalAirportId,
-                                                       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime departureDate,
-                                                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime arrivalDate,
-                                                       @RequestParam(required = false) Long airlineCompanyId,
-                                                       @RequestParam Integer numberOfSeat,
-                                                       @RequestParam(required = false, defaultValue = "false") boolean onlyGoing) {
+    @GetMapping(value = "flights/")
+    public ResponseEntity<FlightResultDto> searcFlight(@RequestParam("departureAirportId") Long departureAirportId,
+                                                       @RequestParam("arrivalAirportId") Long arrivalAirportId,
+                                                       @RequestParam(value = "departureDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime departureDate,
+                                                       @RequestParam(value = "arrivalDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime arrivalDate,
+                                                       @RequestParam(value = "airlineCompanyId", required = false) Long airlineCompanyId,
+                                                       @RequestParam(value = "numberOfSeat") Integer numberOfSeat,
+                                                       @RequestParam(value = "onlyGoing", required = false, defaultValue = "false") boolean onlyGoing) {
         FlightSearchDto flightSearchDto = new FlightSearchDto(departureAirportId, arrivalAirportId, departureDate, arrivalDate, airlineCompanyId, numberOfSeat, onlyGoing);
         FlightResultDto flightResultDto = flightService.searchFlights(flightSearchDto);
         return new ResponseEntity<>(flightResultDto, HttpStatus.OK);

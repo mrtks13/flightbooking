@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("flightroute/")
+@RequestMapping("v1/")
 public class FlightRouteController {
     private final FlightRouteService flightRouteService;
 
@@ -20,13 +20,13 @@ public class FlightRouteController {
         this.flightRouteService = flightRouteService;
     }
 
-    @GetMapping(value = "search/")
+    @GetMapping(value="flightroutes/",params = {"departureAirportId, arrivalAirportId"})
     @ResponseStatus(HttpStatus.OK)
-    public List<FlightRouteDto> searcFlightRoute(@RequestParam Long departureAirportId, @RequestParam Long arrivalAirportId) {
+    public List<FlightRouteDto> searcFlightRoute(@RequestParam("departureAirportId") Long departureAirportId, @RequestParam("arrivalAirportId") Long arrivalAirportId) {
         return flightRouteService.search(new FlightRouteDto(departureAirportId, arrivalAirportId));
     }
 
-    @PostMapping(value = "save")
+    @PostMapping(value="flightroutes/")
     @ResponseStatus(HttpStatus.CREATED)
     public FlightRouteDto saveFlightRoute(@RequestBody @Valid FlightRouteDto flightRouteDto) {
         return flightRouteService.SaveRoute(flightRouteDto);
