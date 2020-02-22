@@ -39,7 +39,7 @@ public class FlightBookingServiceImpl implements FlightBookingService {
 
         Flight flight = flightService.getFlightById(flightId);
 
-        if (!isAvailable(flight, numOfSeat)) {
+        if (!isAvailableSeat(flight, numOfSeat)) {
             throw new FlightBookingException(ErrorMessages.FLIGT_IS_FULL);
         }
         FlightBooking flightBooking = new FlightBooking();
@@ -54,7 +54,7 @@ public class FlightBookingServiceImpl implements FlightBookingService {
         return flightBooking;
     }
 
-    private Boolean isAvailable(Flight flight, Integer getNumberOfSeat) {
+    private Boolean isAvailableSeat(Flight flight, Integer getNumberOfSeat) {
 
         return (flight.getNumberOfTotalSeat() - flight.getNumberOfBookingSeat() + getNumberOfSeat) > 0;
 

@@ -45,8 +45,8 @@ public class FlightRepositoryIT {
     @Test
     public void WhenRoundWay_ThensearchFlights_OK() {
 
-        String departureDateStr = "2020-01-12 00:00";
-        String returnDateDateStr = "2020-01-15 00:00";
+        String departureDateStr = "2020-01-12";
+        String returnDateDateStr = "2020-01-15";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 

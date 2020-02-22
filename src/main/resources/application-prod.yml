@@ -13,19 +13,14 @@ spring:
   jackson:
     serialization:
       indent-output: true
+    deserialization:
+
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3307/flightbookingapp?useSSL=false}
     username: ${SPRING_DATASOURCE_USERNAME:root}
     password: ${SPRING_DATASOURCE_PASSWORD:finartz}
-    hikari:
-      poolName: Hikari
-      auto-commit: false
-      data-source-properties:
-        cachePrepStmts: true
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        useServerPrepStmts: true
   cache:
     ehcache:
       config: classpath:ehcache.xml

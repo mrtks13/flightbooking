@@ -26,7 +26,6 @@ public class AirportController {
         }
     }
 
-    @Autowired
     public AirportController(AirportService airportService) {
         this.airportService = airportService;
     }
